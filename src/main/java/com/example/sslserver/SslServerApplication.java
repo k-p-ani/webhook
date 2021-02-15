@@ -35,4 +35,9 @@ class SecuredServerController {
 	public Greeting greeting() {
 		return new Greeting("world ..!!");
 	}
+	
+	@RequestMapping(value="greeting", method = RequestMethod.GET, produces = "application/json")
+	public Greeting greetingurlS() {
+		return new Greeting("world greeting..!!");
+	}
 }
