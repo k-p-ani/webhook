@@ -97,9 +97,10 @@ class SecuredServerController {
 			throw new RuntimeException(e);
 		}
 		System.out.println(" getFailedPayload Context "+context);
-		String renderedTemplate = jinjava.render(template, context);
+		System.out.println("template "+template);
+		//String renderedTemplate = jinjava.render(template, context);
 
-		return renderedTemplate;
+		return template;
 	}
 	
 	private String getPassedPayload(String apiVersion, String uid) {
