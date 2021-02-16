@@ -70,7 +70,7 @@ class SecuredServerController {
 			String apiVersion = jsonNode.at("/apiVersion").asText();
 			String requestId = jsonNode.at("/request/uid").asText();
 			String failed = getFailedPayload(apiVersion,requestId);
-			String passed = getPassedPayload(apiVersion,requestId);
+			//String passed = getPassedPayload(apiVersion,requestId);
 			responseBody = failed;
 
 			//System.out.println(" failed is \n" + failed + "\n");
@@ -96,8 +96,7 @@ class SecuredServerController {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
-		System.out.println(" getFailedPayload Context "+context);
-		System.out.println("template "+template);
+		//System.out.println("template "+template);
 		//String renderedTemplate = jinjava.render(template, context);
 
 		return template;
