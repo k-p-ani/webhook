@@ -62,7 +62,7 @@ class SecuredServerController {
 	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
 	public ResponseEntity<String> validate(@RequestBody String jsonRequest) {
 
-		System.out.println(" json request is \n" + jsonRequest + "\n");
+		//System.out.println(" json request is \n" + jsonRequest + "\n");
 		JsonNode jsonNode = null;
 		String responseBody = null;
 		try {
@@ -73,8 +73,8 @@ class SecuredServerController {
 			String passed = getPassedPayload(apiVersion,requestId);
 			responseBody = failed;
 
-			System.out.println(" failed is \n" + failed + "\n");
-			System.out.println(" passed is \n" + passed + "\n");
+			//System.out.println(" failed is \n" + failed + "\n");
+			System.out.println(" responseBody is \n" + responseBody + "\n");
 			
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(responseBody);
 		} catch (Exception e) {
@@ -96,6 +96,7 @@ class SecuredServerController {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
+		System.out.println(" getFailedPayload Context "+context);
 		String renderedTemplate = jinjava.render(template, context);
 
 		return renderedTemplate;
@@ -113,6 +114,7 @@ class SecuredServerController {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
+		System.out.println(" getPassedPayload Context "+context);
 		String renderedTemplate = jinjava.render(template, context);
 
 		return renderedTemplate;

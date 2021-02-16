@@ -1,8 +1,8 @@
 {
-  "apiVersion": "API_VERSION",
+  "apiVersion": "{{API_VERSION}}",
   "kind": "AdmissionReview",
   "response": {
-    "uid": "REQUEST_ID",
+    "uid": "{{REQUEST_ID}}",
     "allowed": true
   }
 }
