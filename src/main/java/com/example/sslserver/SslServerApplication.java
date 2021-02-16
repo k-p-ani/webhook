@@ -62,20 +62,23 @@ class SecuredServerController {
 	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
 	public ResponseEntity<String> validate(@RequestBody String jsonRequest) {
 
-		//System.out.println(" json request is \n" + jsonRequest + "\n");
+		System.out.println("1 json request is \n" + jsonRequest + "\n");
 		JsonNode jsonNode = null;
 		String responseBody = null;
 		try {
+			System.out.println("2 ");
 			jsonNode = objectMapper.readTree(jsonRequest);
-			String apiVersion = jsonNode.at("/apiVersion").asText();
-			String requestId = jsonNode.at("/request/uid").asText();
+			String apiVersion = null;//jsonNode.at("/apiVersion").asText();
+			String requestId = null;//jsonNode.at("/request/uid").asText();
+			System.out.println("3 ");
 			String failed = getFailedPayload(apiVersion,requestId);
+			System.out.println("4 ");			
 			//String passed = getPassedPayload(apiVersion,requestId);
 			responseBody = failed;
-
+			System.out.println("5 ");
 			//System.out.println(" failed is \n" + failed + "\n");
 			System.out.println(" responseBody is \n" + responseBody + "\n");
-			
+			System.out.println("6 ");			
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(responseBody);
 		} catch (Exception e) {
 			e.printStackTrace();

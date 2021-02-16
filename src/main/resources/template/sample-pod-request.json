@@ -58,67 +58,8 @@
 					"operation": "Update",
 					"apiVersion": "v1",
 					"time": "2021-02-15T15:14:02Z",
-					"fieldsType": "FieldsV1",
-					"fieldsV1": {
-						"f:metadata": {
-							"f:annotations": {
-								".": {},
-								"f:openshift.io/deployment-config.name": {},
-								"f:openshift.io/deployment.name": {}
-							},
-							"f:labels": {
-								".": {},
-								"f:openshift.io/deployer-pod-for.name": {}
-							},
-							"f:ownerReferences": {
-								".": {},
-								"k:{\"uid\":\"243016b6-1561-4844-9a7b-4c3afa2237ce\"}": {
-									".": {},
-									"f:apiVersion": {},
-									"f:kind": {},
-									"f:name": {},
-									"f:uid": {}
-								}
-							}
-						},
-						"f:spec": {
-							"f:activeDeadlineSeconds": {},
-							"f:containers": {
-								"k:{\"name\":\"deployment\"}": {
-									".": {},
-									"f:env": {
-										".": {},
-										"k:{\"name\":\"OPENSHIFT_DEPLOYMENT_NAME\"}": {
-											".": {},
-											"f:name": {},
-											"f:value": {}
-										},
-										"k:{\"name\":\"OPENSHIFT_DEPLOYMENT_NAMESPACE\"}": {
-											".": {},
-											"f:name": {},
-											"f:value": {}
-										}
-									},
-									"f:image": {},
-									"f:imagePullPolicy": {},
-									"f:name": {},
-									"f:resources": {},
-									"f:terminationMessagePath": {},
-									"f:terminationMessagePolicy": {}
-								}
-							},
-							"f:dnsPolicy": {},
-							"f:enableServiceLinks": {},
-							"f:restartPolicy": {},
-							"f:schedulerName": {},
-							"f:securityContext": {},
-							"f:serviceAccount": {},
-							"f:serviceAccountName": {},
-							"f:shareProcessNamespace": {},
-							"f:terminationGracePeriodSeconds": {}
-						}
-					}
-				}]
+					"fieldsType": "FieldsV1"
+                }]
 			},
 			"spec": {
 				"volumes": [{
