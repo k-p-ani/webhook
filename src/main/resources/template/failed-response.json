@@ -1,0 +1,12 @@
+{
+  "apiVersion": "API_VERSION",
+  "kind": "AdmissionReview",
+  "response": {
+    "uid": "REQUEST_ID",
+    "allowed": false,
+    "status": {
+      "code": 403,
+      "message": "Application will not be deployed, as container image used is not signed by authorized signature"
+    }
+  }
+}
