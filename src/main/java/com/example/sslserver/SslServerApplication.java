@@ -10,13 +10,14 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.example.response.FailedResponse;
+import com.example.response.Response;
+import com.example.response.Status;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Charsets;
@@ -60,11 +61,12 @@ class SecuredServerController {
 			"}";
 
 	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
-	public ResponseEntity<String> validate(@RequestBody String jsonRequest) {
+	public ResponseEntity<FailedResponse> validate(@RequestBody String jsonRequest) {
 
 		System.out.println("1 json request is \n" + jsonRequest + "\n");
 		JsonNode jsonNode = null;
 		String responseBody = null;
+		FailedResponse fresp = null;
 		try {
 			System.out.println("2 ");
 			jsonNode = objectMapper.readTree(jsonRequest);
@@ -75,15 +77,28 @@ class SecuredServerController {
 			System.out.println("4 ");			
 			//String passed = getPassedPayload(apiVersion,requestId);
 			responseBody = failed;
+			
+			
+			Status status = new Status();
+			status.setCode(402);
+			status.setMessage("Application will not be deployed, as container image used is not signed by authorized signature");
+			status.setReason("Invalid signature");
+			status.setStatus("Failure");
+			Response resp = new Response();
+			resp.setAllowed(false);
+			resp.setStatus(status);
+			fresp = new FailedResponse();
+			fresp.setResponse(resp);
+			
 			System.out.println("5 ");
 			//System.out.println(" failed is \n" + failed + "\n");
 			System.out.println(" responseBody is \n" + responseBody + "\n");
 			System.out.println("6 ");			
-			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(responseBody);
+			return ResponseEntity.status(HttpStatus.PAYMENT_REQUIRED).body(fresp);
 		} catch (Exception e) {
 			e.printStackTrace();
 			responseBody = unhandleException.replace("ERROR_MESSAGE", "AMOS-Error while proccessing input request "+e.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseBody);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(fresp);
 		}
 	}
 	
