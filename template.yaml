@@ -129,7 +129,7 @@ objects:
   spec:
     ports:
     - name: 8443-tcp
-      port: 8443
+      port: 443
       protocol: TCP
       targetPort: 8443
     selector:
