@@ -86,7 +86,7 @@ class SecuredServerController {
 			System.out.println("2 ");
 			jsonNode = objectMapper.readTree(jsonRequest);
 			String apiVersion = null;//jsonNode.at("/apiVersion").asText();
-			String requestId = null;//jsonNode.at("/request/uid").asText();
+			String requestId = jsonNode.at("/request/uid").asText();
 			System.out.println("3 ");
 			String failed = getFailedPayload(apiVersion,requestId);
 			System.out.println("4 ");			
@@ -104,10 +104,24 @@ class SecuredServerController {
 			resp.setStatus(status);
 			fresp = new FailedResponse();
 			fresp.setResponse(resp);
-			
 			System.out.println("5 ");
-			//System.out.println(" failed is \n" + failed + "\n");
-			ResponseEntity<String>  rs = ResponseEntity.status(HttpStatus.PAYMENT_REQUIRED).body(respo);
+			
+			
+			String newResp = "{\n" + 
+					"  \"apiVersion\": \"admission.k8s.io/v1beta1\",\n" + 
+					"  \"kind\": \"AdmissionReview\",\n" + 
+					"  \"response\": {\n" + 
+					"    \"uid\": "+requestId+",\n" + 
+					"    \"allowed\": false,\n" + 
+					"    \"status\": {\n" + 
+					"      \"code\": 403,\n" + 
+					"      \"message\": \"You cannot do this because it is Tuesday and your name starts with A\"\n" + 
+					"    }\n" + 
+					"  }\n" + 
+					"}";
+			
+			
+			ResponseEntity<String>  rs = ResponseEntity.status(HttpStatus.PAYMENT_REQUIRED).body(newResp);
 			System.out.println(" response is \n" + rs.getHeaders() + "\n");
 			System.out.println(" response is \n" + rs.getBody() + "\n");
 			System.out.println("6 ");	
