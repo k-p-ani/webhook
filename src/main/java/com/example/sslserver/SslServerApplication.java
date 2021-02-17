@@ -61,12 +61,27 @@ class SecuredServerController {
 			"}";
 
 	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
-	public ResponseEntity<FailedResponse> validate(@RequestBody String jsonRequest) {
+	public ResponseEntity<String> validate(@RequestBody String jsonRequest) {
 
 		System.out.println("1 json request is \n" + jsonRequest + "\n");
 		JsonNode jsonNode = null;
 		String responseBody = null;
 		FailedResponse fresp = null;
+		
+		String respo = "{\n" + 
+				"    response: {\n" + 
+				"      allowed: false,\n" + 
+				"      status: {\n" + 
+				"        status: 'Failure',\n" + 
+				"        message: 'New pods denied',\n" + 
+				"        reason: 'No new pods allowed in this project',\n" + 
+				"        code: 402\n" + 
+				"      }\n" + 
+				"    }\n" + 
+				"  }";
+		
+		
+		
 		try {
 			System.out.println("2 ");
 			jsonNode = objectMapper.readTree(jsonRequest);
@@ -94,11 +109,11 @@ class SecuredServerController {
 			//System.out.println(" failed is \n" + failed + "\n");
 			System.out.println(" responseBody is \n" + responseBody + "\n");
 			System.out.println("6 ");			
-			return ResponseEntity.status(HttpStatus.PAYMENT_REQUIRED).body(fresp);
+			return ResponseEntity.status(HttpStatus.PAYMENT_REQUIRED).body(respo);
 		} catch (Exception e) {
 			e.printStackTrace();
 			responseBody = unhandleException.replace("ERROR_MESSAGE", "AMOS-Error while proccessing input request "+e.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(fresp);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseBody);
 		}
 	}
 	
