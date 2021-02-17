@@ -107,9 +107,13 @@ class SecuredServerController {
 			
 			System.out.println("5 ");
 			//System.out.println(" failed is \n" + failed + "\n");
-			System.out.println(" responseBody is \n" + responseBody + "\n");
-			System.out.println("6 ");			
-			return ResponseEntity.status(HttpStatus.PAYMENT_REQUIRED).body(respo);
+			ResponseEntity<String>  rs = ResponseEntity.status(HttpStatus.PAYMENT_REQUIRED).body(respo);
+			System.out.println(" response is \n" + rs.getHeaders() + "\n");
+			System.out.println(" response is \n" + rs.getBody() + "\n");
+			System.out.println("6 ");	
+			
+			return rs;
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			responseBody = unhandleException.replace("ERROR_MESSAGE", "AMOS-Error while proccessing input request "+e.getMessage());
