@@ -67,44 +67,24 @@ class SecuredServerController {
 		JsonNode jsonNode = null;
 		String responseBody = null;
 		FailedResponse fresp = null;
-		
-		String respo = "{\n" + 
-				"    response: {\n" + 
-				"      allowed: false,\n" + 
-				"      status: {\n" + 
-				"        status: 'Failure',\n" + 
-				"        message: 'New pods denied',\n" + 
-				"        reason: 'No new pods allowed in this project',\n" + 
-				"        code: 402\n" + 
-				"      }\n" + 
-				"    }\n" + 
-				"  }";
-		
-		
-		
 		try {
 			System.out.println("2 ");
 			jsonNode = objectMapper.readTree(jsonRequest);
 			String apiVersion = null;//jsonNode.at("/apiVersion").asText();
 			String requestId = jsonNode.at("/request/uid").asText();
-			System.out.println("3 ");
-			String failed = getFailedPayload(apiVersion,requestId);
-			System.out.println("4 ");			
-			//String passed = getPassedPayload(apiVersion,requestId);
-			responseBody = failed;
-			
-			
-			Status status = new Status();
-			status.setCode(402);
-			status.setMessage("Application will not be deployed, as container image used is not signed by authorized signature");
-			status.setReason("Invalid signature");
-			status.setStatus("Failure");
-			Response resp = new Response();
-			resp.setAllowed(false);
-			resp.setStatus(status);
-			fresp = new FailedResponse();
-			fresp.setResponse(resp);
-			System.out.println("5 ");
+			/*
+			 * System.out.println("3 "); String failed =
+			 * getFailedPayload(apiVersion,requestId); System.out.println("4 "); String
+			 * passed = getPassedPayload(apiVersion,requestId); responseBody = failed;
+			 * 
+			 * 
+			 * Status status = new Status(); status.setCode(402); status.
+			 * setMessage("Application will not be deployed, as container image used is not signed by authorized signature"
+			 * ); status.setReason("Invalid signature"); status.setStatus("Failure");
+			 * Response resp = new Response(); resp.setAllowed(false);
+			 * resp.setStatus(status); fresp = new FailedResponse();
+			 * fresp.setResponse(resp); System.out.println("5 ");
+			 */
 			
 			
 			String newResp = "{\n" + 
