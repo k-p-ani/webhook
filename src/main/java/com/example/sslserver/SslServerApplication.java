@@ -101,7 +101,18 @@ class SecuredServerController {
 					"}";
 			
 			
-			ResponseEntity<String>  rs = ResponseEntity.status(HttpStatus.PAYMENT_REQUIRED).body(newResp);
+			String newRespTwo="{\n" + 
+					"  \"apiVersion\": \"admission.k8s.io/v1beta1\",\n" + 
+					"  \"kind\": \"AdmissionReview\",\n" + 
+					"  \"response\": {\n" + 
+					"    \"uid\": \"+requestId+\",\n" + 
+					"    \"allowed\": true\n" + 
+					"  }\n" + 
+					"}";
+			
+			
+			
+			ResponseEntity<String>  rs = ResponseEntity.status(HttpStatus.PAYMENT_REQUIRED).body(newRespTwo);
 			System.out.println(" response is \n" + rs.getHeaders() + "\n");
 			System.out.println(" response is \n" + rs.getBody() + "\n");
 			System.out.println("6 ");	
