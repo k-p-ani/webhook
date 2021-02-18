@@ -112,18 +112,18 @@ class SecuredServerController {
 					"}" + 
 					"}";
 			
-			String newResp3="{response: {" + 
-					"allowed: true," + 
-					"status: {" + 
-					"status: 'Success'," + 
-					"message: 'New pods allowed'," + 
-					"reason: 'new pods are allowed in this project'," + 
-					"code: 200" + 
+			String newResp3="{'response': {" + 
+					"'allowed': true," + 
+					"'status': {" + 
+					"'status': 'Success'," + 
+					"'message': 'New pods allowed'," + 
+					"'reason': 'new pods are allowed in this project'," + 
+					"'code': 200" + 
 					"}" + 
 					"}" + 
 					"}";
 			
-			ResponseEntity<String>  rs = ResponseEntity.status(HttpStatus.OK).body(newRespTwo);
+			ResponseEntity<String>  rs = ResponseEntity.status(HttpStatus.OK).body(newResp3);
 			System.out.println(" response is \n" + rs.getStatusCodeValue() + "\n");
 			System.out.println(" response is \n" + rs.getBody() + "\n");
 			System.out.println("6 ");	
