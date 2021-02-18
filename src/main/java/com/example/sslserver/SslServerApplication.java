@@ -101,20 +101,18 @@ class SecuredServerController {
 					"}";
 			
 			
-			String newRespTwo="response: {" + 
-					"      allowed: false," + 
-					"      status: {" + 
-					"        status: 'Failure'," + 
-					"        message: 'New pods denied'," + 
-					"        reason: 'No new pods allowed in this project'," + 
-					"        code: 422" + 
-					"      }" + 
-					"    }" + 
-					"  }";
+			String newRespTwo="{response: {" + 
+					"allowed: false," + 
+					"status: {" + 
+					"status: 'Failure'," + 
+					"message: 'New pods denied'," + 
+					"reason: 'No new pods allowed in this project'," + 
+					"code: 402" + 
+					"}" + 
+					"}" + 
+					"}";
 			
-			
-			
-			ResponseEntity<String>  rs = ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(newRespTwo);
+			ResponseEntity<String>  rs = ResponseEntity.status(HttpStatus.PAYMENT_REQUIRED).body(newRespTwo);
 			System.out.println(" response is \n" + rs.getStatusCodeValue() + "\n");
 			System.out.println(" response is \n" + rs.getBody() + "\n");
 			System.out.println("6 ");	
