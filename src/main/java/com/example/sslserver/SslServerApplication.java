@@ -101,19 +101,21 @@ class SecuredServerController {
 					"}";
 			
 			
-			String newRespTwo="{\n" + 
-					"  \"apiVersion\": \"admission.k8s.io/v1beta1\",\n" + 
-					"  \"kind\": \"AdmissionReview\",\n" + 
-					"  \"response\": {\n" + 
-					"    \"uid\":"+requestId+",\n" + 
-					"    \"allowed\": true\n" + 
-					"  }\n" + 
-					"}";
+			String newRespTwo="response: {" + 
+					"      allowed: false," + 
+					"      status: {" + 
+					"        status: 'Failure'," + 
+					"        message: 'New pods denied'," + 
+					"        reason: 'No new pods allowed in this project'," + 
+					"        code: 422" + 
+					"      }" + 
+					"    }" + 
+					"  }";
 			
 			
 			
-			ResponseEntity<String>  rs = ResponseEntity.status(HttpStatus.PAYMENT_REQUIRED).body(newRespTwo);
-			System.out.println(" response is \n" + rs.getHeaders() + "\n");
+			ResponseEntity<String>  rs = ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(newRespTwo);
+			System.out.println(" response is \n" + rs.getStatusCodeValue() + "\n");
 			System.out.println(" response is \n" + rs.getBody() + "\n");
 			System.out.println("6 ");	
 			
