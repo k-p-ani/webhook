@@ -105,7 +105,7 @@ class SecuredServerController {
 					"  \"apiVersion\": \"admission.k8s.io/v1beta1\",\n" + 
 					"  \"kind\": \"AdmissionReview\",\n" + 
 					"  \"response\": {\n" + 
-					"    \"uid\": \"+requestId+\",\n" + 
+					"    \"uid\":"+requestId+",\n" + 
 					"    \"allowed\": true\n" + 
 					"  }\n" + 
 					"}";
