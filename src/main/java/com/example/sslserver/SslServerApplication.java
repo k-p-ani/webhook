@@ -102,8 +102,9 @@ class SecuredServerController {
 			
 			
 			String newResp3 = "{\"apiVersion\": \"admission.k8s.io/v1beta1\",\"kind\": \"AdmissionReview\",\"response\": {\"uid\":\""+requestId+"\",\"allowed\": true,\"status\": {\"code\": 200,\"message\": \"You can do this because it is Friday and your name starts with A\"}}}";
+			String newResp4 = "{\"apiVersion\": \"admission.k8s.io/v1beta1\",\"kind\": \"AdmissionReview\",\"response\": {\"uid\":\""+requestId+"\",\"allowed\": false,\"status\": {\"code\": 402,\"message\": \"You cannot do this because it is Friday and your name starts with A\"}}}";
 			
-			ResponseEntity<String>  rs = ResponseEntity.status(HttpStatus.OK).body(newResp3);
+			ResponseEntity<String>  rs = ResponseEntity.status(HttpStatus.OK).body(newResp4);
 			System.out.println(" response is \n" + rs.getStatusCodeValue() + "\n");
 			System.out.println(" response is \n" + rs.getBody() + "\n");
 			System.out.println("6 ");	
