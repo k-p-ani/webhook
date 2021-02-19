@@ -101,27 +101,7 @@ class SecuredServerController {
 					"}";
 			
 			
-			String newRespTwo="{response: {" + 
-					"allowed: false," + 
-					"status: {" + 
-					"status: 'Failure'," + 
-					"message: 'New pods denied'," + 
-					"reason: 'No new pods allowed in this project'," + 
-					"code: 402" + 
-					"}" + 
-					"}" + 
-					"}";
-			
-			String newResp3="{'response': {" + 
-					"'allowed': true," + 
-					"'status': {" + 
-					"'status': 'Success'," + 
-					"'message': 'New pods allowed'," + 
-					"'reason': 'new pods are allowed in this project'," + 
-					"'code': 200" + 
-					"}" + 
-					"}" + 
-					"}";
+			String newResp3 = "{\"apiVersion\": \"admission.k8s.io/v1beta1\",\"kind\": \"AdmissionReview\",\"response\": {\"uid\":"+requestId+",\"allowed\": true,\"status\": {\"code\": 200,\"message\": \"You can do this because it is Friday and your name starts with A\"}}}";
 			
 			ResponseEntity<String>  rs = ResponseEntity.status(HttpStatus.OK).body(newResp3);
 			System.out.println(" response is \n" + rs.getStatusCodeValue() + "\n");
