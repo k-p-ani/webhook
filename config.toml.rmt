@@ -1,0 +1,8 @@
+[servers]
+
+[servers.myubuntu]
+host               = "10.0.0.248"
+user               = "ubuntu"
+port               = "22"
+keyPath            = "/home/ubuntu/.ssh/pvt.pem"
+scanMode           = ["fast"]
